@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddfjnlkp7bcud"]
+
+[ext_resource type="Texture2D" uid="uid://bvtyf1vj2bero" path="res://assets/spr_selectBox_32x32.png" id="1_hrnbp"]
+
+[node name="BoxSelect" type="Sprite2D"]
+texture = ExtResource("1_hrnbp")

@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://v7tp781jh43w"]
+
+[ext_resource type="Texture2D" uid="uid://ctoyqyo1mk02i" path="res://assets/atlas_checkerboard_2x1.png" id="1_ww4qx"]
+[ext_resource type="PackedScene" uid="uid://c2wvn3t0ulp5o" path="res://scenes/VBoxContainer.tscn" id="2_016lj"]
+[ext_resource type="Script" path="res://scripts/Map.gd" id="2_e6ufy"]
+[ext_resource type="Script" path="res://scripts/RichTextLabel.gd" id="2_temc7"]
+[ext_resource type="Script" path="res://scripts/RichTextLabel2.gd" id="4_i4xpe"]
+[ext_resource type="PackedScene" uid="uid://hkrjqdlrlx8w" path="res://scenes/ActionData.tscn" id="5_7ifkd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_okdx3"]
+texture = ExtResource("1_ww4qx")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6f3ew"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_okdx3")
+
+[node name="SceneMain" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+offset_left = -9.0
+offset_top = -12.0
+offset_right = 661.0
+offset_bottom = 383.0
+color = Color(0.482353, 0.172549, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="TileMap" type="TileMap" parent="CanvasLayer"]
+position = Vector2(64, 64)
+tile_set = SubResource("TileSet_6f3ew")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 1, 0, 65537, 1, 0, 131074, 1, 0, 2, 1, 0, 65539, 1, 0, 131076, 1, 0, 4, 1, 0, 65541, 1, 0, 131078, 1, 0, 131072, 1, 0, 65543, 1, 0, 6, 1, 0, 8, 1, 0, 131080, 1, 0, 65545, 1, 0, 10, 1, 0, 131082, 1, 0, 196609, 1, 0, 262144, 1, 0, 262146, 1, 0, 196611, 1, 0, 262148, 1, 0, 196613, 1, 0, 262150, 1, 0, 196615, 1, 0, 262152, 1, 0, 196617, 1, 0, 262154, 1, 0, 327689, 1, 0, 327687, 1, 0, 327685, 1, 0, 327683, 1, 0, 327681, 1, 0, 393216, 1, 0, 393218, 1, 0, 393220, 1, 0, 393222, 1, 0, 393224, 1, 0, 393226, 1, 0, 393225, 65537, 0, 327690, 65537, 0, 327688, 65537, 0, 393223, 65537, 0, 327686, 65537, 0, 393221, 65537, 0, 327684, 65537, 0, 393219, 65537, 0, 327682, 65537, 0, 393217, 65537, 0, 327680, 65537, 0, 262145, 65537, 0, 196610, 65537, 0, 262147, 65537, 0, 196612, 65537, 0, 262149, 65537, 0, 196614, 65537, 0, 262151, 65537, 0, 196616, 65537, 0, 262153, 65537, 0, 196618, 65537, 0, 196608, 65537, 0, 131073, 65537, 0, 65536, 65537, 0, 65538, 65537, 0, 131075, 65537, 0, 65540, 65537, 0, 131077, 65537, 0, 65542, 65537, 0, 131079, 65537, 0, 65544, 65537, 0, 131081, 65537, 0, 65546, 65537, 0, 1, 65537, 0, 3, 65537, 0, 5, 65537, 0, 7, 65537, 0, 9, 65537, 0, 11, 65537, 0, 131083, 65537, 0, 262155, 65537, 0, 393227, 65537, 0, 327691, 1, 0, 196619, 1, 0, 65547, 1, 0, 458763, 1, 0, 458761, 1, 0, 458759, 1, 0, 458757, 1, 0, 458755, 1, 0, 458753, 1, 0, 458752, 65537, 0, 458754, 65537, 0, 458756, 65537, 0, 458758, 65537, 0, 458760, 65537, 0, 458762, 65537, 0)
+metadata/_edit_lock_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" node_paths=PackedStringArray("sharedData")]
+offset_left = 456.0
+offset_top = 8.0
+offset_right = 626.0
+offset_bottom = 176.0
+text = "Current Turn: Player
+Turns Left: 20
+
+Current Input mode:
+\"placing-units\""
+script = ExtResource("2_temc7")
+sharedData = NodePath("../../ActionData")
+
+[node name="VBoxContainer" parent="CanvasLayer" instance=ExtResource("2_016lj")]
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer" node_paths=PackedStringArray("sharedData")]
+offset_left = 128.0
+offset_top = 8.0
+offset_right = 432.0
+offset_bottom = 56.0
+text = "Lead: Team (Player or CPU)
+"
+script = ExtResource("4_i4xpe")
+sharedData = NodePath("../../ActionData")
+
+[node name="MapScript" type="Node2D" parent="." node_paths=PackedStringArray("sharedData")]
+script = ExtResource("2_e6ufy")
+sharedData = NodePath("../ActionData")
+metadata/_edit_lock_ = true
+
+[node name="ActionData" parent="." instance=ExtResource("5_7ifkd")]
